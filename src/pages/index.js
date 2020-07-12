@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react"
 import axios from 'axios'
-import { Link } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import { useAuth } from "react-use-auth"
 
 const IndexPage = () => {
 
   const [thoughts, setThoughts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const { isAuthenticated, login, logout } = useAuth()
 
   useEffect(() => {
 
@@ -17,8 +17,8 @@ const IndexPage = () => {
       setIsLoading(true)
       try {
         const resp = await axios.post('/api/get-all-thoughts')
-        
-        setThoughts(resp.data.thoughts) 
+
+        setThoughts(resp.data.thoughts)
         setIsLoading(false)
       }
       catch (e) {
@@ -30,6 +30,8 @@ const IndexPage = () => {
     fetchAllThoughts()
 
   }, [])
+
+  console.log(useAuth())
 
   return (
     <Layout>
@@ -45,6 +47,7 @@ const IndexPage = () => {
             </div>
           ))
       }
+      {<button onClick={isAuthenticated() ? logout : login}>Log{ isAuthenticated() ? "out" : "in"}</button>}
     </Layout>
   )
 }
