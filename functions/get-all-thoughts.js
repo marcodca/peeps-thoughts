@@ -3,15 +3,15 @@ const sendQuery = require("./helpers/send-query")
 
 const GET_ALL_THOUGHTS = `
 {
-    thoughts{
-      title
-      id
-      content
-      user{
-        name
-      }
+  thoughts{
+    title
+    id
+    content
+    user{
+      name
     }
-  }  
+  }
+}  
 `
 
 exports.handler = async event => {

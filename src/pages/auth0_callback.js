@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useAuth } from "react-use-auth"
 
-const Callback = () => {
+const Auth0CallbackPage = () => {
   const { handleAuthentication } = useAuth()
 
   useEffect(() => {
@@ -11,4 +11,4 @@ const Callback = () => {
   return <p>Loading...</p>
 }
 
-export default Callback
+export default Auth0CallbackPage

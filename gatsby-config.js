@@ -1,3 +1,8 @@
+  
+require("dotenv").config()
+const fetch = require("isomorphic-fetch")
+const { createHttpLink } = require("apollo-link-http")
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -5,6 +10,24 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "hasura",
+        fieldName: "thoughts",
+        createLink: () => {
+          return createHttpLink({
+            uri:
+              "https://marcodca.herokuapp.com/v1/graphql",
+            headers: {
+              "x-hasura-admin-secret":
+                process.env.GATSBY_HASURA_GRAPHQL_ADMIN_SECRET,
+            },
+            fetch,
+          })
+        },
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

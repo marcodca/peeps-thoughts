@@ -7,7 +7,7 @@ module.exports = async (query, variables) => {
     method: "POST",
     headers: {
         "Content-type": "application/json",
-        "x-hasura-admin-secret": process.env.HASURA_GRAPHQL_ADMIN_SECRET
+        "x-hasura-admin-secret": process.env.GATSBY_HASURA_GRAPHQL_ADMIN_SECRET
     },
     data: {
       query,
